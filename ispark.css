@@ -1,0 +1,54 @@
+ul.check-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+ul.check-list>li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: .5rem;
+}
+
+ul.check-list>li::before {
+    content: '\f068';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+ul.check-list>li.fail {
+    color: red;
+}
+
+ul.check-list>li.fail::before {
+    color: red;
+    content: '\f00d';
+}
+
+ul.check-list>li.done {
+    color: green;
+}
+
+ul.check-list>li.done::before {
+    color: green;
+    content: '\f00c';
+}
+
+.btn-indigo {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #6610f2;
+    --bs-btn-border-color: #6610f2;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #7022ee;
+    --bs-btn-hover-border-color: #621bd6;
+    --bs-btn-focus-shadow-rgb: 225, 83, 97;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #621bd6;
+    --bs-btn-active-border-color: #5f02f5;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #6610f2;
+    --bs-btn-disabled-border-color: #6610f2;
+  }

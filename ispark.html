@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ispark Yeri</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+</head>
+
+<body>
+    <main class="container my-5">
+        <section class="row g-4">
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h4 id="list_title"></h4>
+                    </div>
+                    <div class="card-body p-0">
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Ad</th>
+                                    <th>İlçe</th>
+                                    <th>Doluluk</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="list"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" id="detail">
+
+            </div>
+        </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+        crossorigin="anonymous"></script>
+
+    <script>
+        const d = new Date()
+        document.getElementById('list_title').innerText = `IsPark Güncel Otopark Listesi (${d.toLocaleDateString()})`
+
+        const toRow = (park) => `<tr>
+                <td>${park.parkID}</td>
+                <td>${park.parkName}</td>
+                <td>${park.district}</td>
+                <td>${park.emptyCapacity}/${park.capacity}</td>
+                <td>
+                    <button class="btn ${park.isOpen ? "btn-success" : "btn-danger"} btn-sm" onclick="getDetail(${park.parkID})">
+                        Detay
+                    </button>
+                </td>
+            </tr>`
+
+        const toCard = (park) => `<div class="card">
+            <div class="card-header">
+                <h3>${park.parkName}</h3>
+            </div>
+        </div>`
+
+        const getDetail = (parkId) => {
+            fetch(`https://api.ibb.gov.tr/ispark/ParkDetay?id=${parkId}`)
+                .then(res => res.json())
+                .then(data => document.getElementById('detail').innerHTML = toCard(data[0]))
+                .catch(err => console.error(err))
+        }
+
+
+        fetch('https://api.ibb.gov.tr/ispark/Park')
+            .then(res => res.json())
+            .then(data => document.getElementById('list').innerHTML = data.map(toRow).join(''))
+            .catch(err => console.error("Hata:", err))
+    </script>
+</body>
+
+</html>
