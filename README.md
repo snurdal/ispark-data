@@ -1,6 +1,7 @@
 # İsPark Parking Tracker
 
 A real-time parking availability web app using Istanbul's İsPark API.
+![Ispark Project Screenshot](ispark_data.png)
 
 ## Features
 
